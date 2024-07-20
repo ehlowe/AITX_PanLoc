@@ -52,6 +52,18 @@ class ImagePositionPredictor(nn.Module):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
+
+        # # Fully connected layers
+        # x = self.fc1(x)
+        # x = self.fc2(x)
+        # x = self.fc3(x)
+
+        # # Fully connected layers
+        # x = self.fc1(x)
+        # x = self.fc2(x)
+        # x = self.fc3(x)
+        # x = self.fc4(x)
+        # x = self.fc5(x)
         
         # Apply tanh to first two outputs (x, y) to constrain them between -1 and 1
         # Apply sigmoid to the third output (confidence) to constrain it between 0 and 1
@@ -62,7 +74,7 @@ class ImagePositionPredictor(nn.Module):
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
         x = F.relu(self.bn4(self.conv4(x)))
-        x = F.relu(self.bn5(self.conv5(x)))
+        x = self.bn5(self.conv5(x))
         x = self.gap(x)
         return torch.flatten(x, 1)
 
