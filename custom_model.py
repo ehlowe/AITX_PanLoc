@@ -19,10 +19,17 @@ class ImagePositionPredictor(nn.Module):
         # Global average pooling
         self.gap = nn.AdaptiveAvgPool2d(1)
         
+        # # Fully connected layers
+        # self.fc1 = nn.Linear(512, 256)  # 512 comes from 256 * 2 (two images)
+        # self.fc2 = nn.Linear(256, 64)
+        # self.fc3 = nn.Linear(64, 3)  # Output: x, y, confidence
+
         # Fully connected layers
-        self.fc1 = nn.Linear(512, 256)  # 512 comes from 256 * 2 (two images)
-        self.fc2 = nn.Linear(256, 64)
-        self.fc3 = nn.Linear(64, 3)  # Output: x, y, confidence
+        self.fc1 = nn.Linear(512, 1024)  # 512 comes from 256 * 2 (two images)
+        self.fc2 = nn.Linear(1024, 512)
+        self.fc3 = nn.Linear(512, 256)
+        self.fc4 = nn.Linear(256, 64)
+        self.fc5 = nn.Linear(64, 3)  # Output: x, y, confidence
         
         # Batch normalization layers
         self.bn1 = nn.BatchNorm2d(16)
